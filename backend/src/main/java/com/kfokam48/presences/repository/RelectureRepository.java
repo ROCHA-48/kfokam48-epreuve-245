@@ -12,6 +12,13 @@ public interface RelectureRepository extends JpaRepository<Relecture, Long> {
 
     Optional<Relecture> findByExerciceId(Long exerciceId);
 
+    /**
+     * Detail d'une relecture : l'exercice est charge en meme temps (join fetch),
+     * sinon le lien de l'exercice n'est plus lisible une fois la transaction fermee.
+     */
+    @Query("select r from Relecture r join fetch r.exercice e join fetch e.session s where r.id = :id")
+    Optional<Relecture> trouverDetail(@Param("id") Long id);
+
     /** Les relectures que cet etudiant doit encore faire (Q16, EF11). */
     @Query("""
             select r from Relecture r

@@ -36,7 +36,7 @@ public class RelectureService {
         // La note est validee avant tout : une requete mal formee est refusee
         // avec le code du contrat, que la relecture existe ou non (B2).
         int noteValidee = validerNote(note);
-        Relecture relecture = relectureRepository.findById(relectureId)
+        Relecture relecture = relectureRepository.trouverDetail(relectureId)
                 .orElseThrow(() -> ApiException.relectureInconnue(relectureId));
 
         Exercice exercice = relecture.getExercice();
@@ -67,7 +67,7 @@ public class RelectureService {
 
     @Transactional(readOnly = true)
     public Relecture detail(Long relectureId) {
-        return relectureRepository.findById(relectureId)
+        return relectureRepository.trouverDetail(relectureId)
                 .orElseThrow(() -> ApiException.relectureInconnue(relectureId));
     }
 

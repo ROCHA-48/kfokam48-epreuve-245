@@ -215,6 +215,12 @@ class PresenceControllerIntegrationTest {
         Exercice exercice = exerciceRepository.save(new Exercice(session, awa, "https://github.com/ROCHA-48/exercice-awa"));
         Relecture relecture = relectureRepository.save(new Relecture(exercice, elsa));
 
+        // La lecture detaillee renvoie le lien de l'exercice : c'est le cas qui
+        // doit rester lisible une fois la transaction du service refermee.
+        mockMvc.perform(get("/api/relectures/" + relecture.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.lien").value("https://github.com/ROCHA-48/exercice-awa"));
+
         mockMvc.perform(post("/api/relectures/" + relecture.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"note\":12,\"commentaire\":\"Premier passage.\"}"))
