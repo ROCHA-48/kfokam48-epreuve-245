@@ -28,11 +28,15 @@ public class EtudiantController {
                 .toList();
     }
 
-    /** Q8 / RG5 : notes recues, sans aucune information sur le relecteur. */
+    /**
+     * Q8 / RG5 : notes recues, sans aucune information sur le relecteur.
+     * Issue #19 : chaque note porte son statut — provisoire tant que l'autre
+     * relecteur de l'exercice n'a pas rendu, definitive sinon.
+     */
     @GetMapping("/{etudiantId}/notes-recues")
     public List<NoteRecueResponse> notesRecues(@PathVariable Long etudiantId) {
-        return relectureService.notesRecues(etudiantId).stream()
-                .map(NoteRecueResponse::depuis)
+        return relectureService.notesRecuesAvecStatut(etudiantId).stream()
+                .map(noteRecue -> NoteRecueResponse.depuis(noteRecue.relecture(), noteRecue.provisoire()))
                 .toList();
     }
 }

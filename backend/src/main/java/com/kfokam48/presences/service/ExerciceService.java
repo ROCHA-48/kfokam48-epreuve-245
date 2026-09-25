@@ -69,7 +69,9 @@ public class ExerciceService {
         if (exercice.getSession().isCloturee()) {
             throw ApiException.sessionCloturee();
         }
-        Relecture relecture = relectureRepository.findByExerciceId(exerciceId).orElse(null);
+        // Issue #19 : la relecture est « commencee » des qu'une des deux (premiere
+        // par identifiant croissant) est rendue — le lien ne se remplace plus apres.
+        Relecture relecture = relectureRepository.findFirstByExerciceIdOrderByIdAsc(exerciceId).orElse(null);
         if (relecture != null && relecture.isRendue()) {
             throw ApiException.relectureCommencee();
         }

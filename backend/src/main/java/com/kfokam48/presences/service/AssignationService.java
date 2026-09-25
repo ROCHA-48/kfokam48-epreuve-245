@@ -58,15 +58,24 @@ public class AssignationService {
             if (exercice.getStatut() != StatutExercice.EN_ATTENTE_ASSIGNATION) {
                 continue; // deja assigne par la transaction concurrente (issue #18)
             }
-            Optional<Etudiant> relecteur = attribution.choisir(presents, exercice.getEtudiant());
-            if (relecteur.isEmpty()) {
+            // Issue #19 : deux relecteurs distincts quand la session en compte assez,
+            // un seul sinon — l'exercice n'est jamais perdu (RG13, Z1).
+            Optional<Etudiant> premier = attribution.choisir(presents, exercice.getEtudiant());
+            if (premier.isEmpty()) {
                 continue; // Z1 : reste EN_ATTENTE_ASSIGNATION, jamais perdu
             }
-            Etudiant choisi = relecteur.get();
-            relectureRepository.save(new Relecture(exercice, choisi));
+            Etudiant premierRelecteur = premier.get();
+            relectureRepository.save(new Relecture(exercice, premierRelecteur));
+            presents.remove(premierRelecteur);
+
+            attribution.choisir(presents, exercice.getEtudiant(), List.of(premierRelecteur))
+                    .ifPresent(secondRelecteur -> {
+                        relectureRepository.save(new Relecture(exercice, secondRelecteur));
+                        presents.remove(secondRelecteur);
+                    });
+
             exercice.setStatut(StatutExercice.EN_ATTENTE_RELECTURE);
             exerciceRepository.save(exercice);
-            presents.remove(choisi); // repartition plus juste quand plusieurs exercices attendent
         }
     }
 }
