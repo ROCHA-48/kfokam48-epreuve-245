@@ -77,7 +77,15 @@ Le relecteur n'est pas un acteur distinct : c'est un étudiant, désigné tempor
 | RG1 | Un code de présence expire 15 minutes après l'ouverture de la session | Q2 |
 | RG2 | Un étudiant ne peut pas relire son propre exercice | Q5 |
 | RG3 | Une note est un entier compris entre 0 et 20 | Q9 |
-| RG4 | | |
+| RG4 | Un exercice a un seul relecteur, désigné au hasard parmi les étudiants présents à la session | Q6, Q7 |
+| RG5 | L'étudiant relu voit sa note et son commentaire, mais jamais l'identité du relecteur | Q8 |
+| RG6 | Le formateur peut ajouter une présence manuellement, marquée « ajouté par le formateur » pour la distinguer d'une présence auto-déclarée | Q14 |
+| RG7 | Un étudiant peut déposer son exercice jusqu'à la clôture de la session par le formateur, même après la fin théorique de la session | Q12 |
+| RG8 | Un étudiant peut remplacer le lien de son exercice tant que personne n'a commencé à le relire | Q13 |
+| RG9 | Si le relecteur ne rend jamais sa relecture, l'exercice reste au statut « en attente », visible comme tel dans le tableau du formateur | Q11 |
+| RG10 | Après 5 erreurs de code de présence, l'étudiant est bloqué pendant 2 minutes | Q4 |
+| RG11 | Un relecteur peut corriger sa note tant que le formateur n'a pas clôturé la session (décision tranchée en section 7, contradiction avec Q15) | Q10 |
+| RG12 | Une présence ne peut pas être marquée après l'expiration du code | Q2, Q3 |
 
 *Numérote-les. Tu les citeras dans tes issues, tes messages de commit et tes tests. Une règle qu'on ne peut pas citer est une règle qu'on oublie.*
 
