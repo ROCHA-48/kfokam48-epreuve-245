@@ -58,7 +58,7 @@ erDiagram
         bigint exercice_id FK "UK : un seul relecteur par exercice (Q6)"
         bigint relecteur_id FK "étudiant présent, différent de l'auteur (Q5, Q7)"
         integer note "nullable, entier 0..20 (RG3)"
-        text commentaire "nullable"
+        varchar commentaire "4000, nullable"
         timestamptz assignee_at
         timestamptz rendue_at "nullable : null tant que la relecture n'est pas rendue"
     }
