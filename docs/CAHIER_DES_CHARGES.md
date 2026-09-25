@@ -65,8 +65,10 @@ Le relecteur n'est pas un acteur distinct : c'est un étudiant, désigné tempor
 
 | Réf | Exigence | Comment on la vérifie |
 |---|---|---|
-| ENF1 | L'interface de marquage de présence est utilisable sur un téléphone | |
-| ENF2 | Le tableau du formateur répond en moins de 2 s pour une promotion de 60 étudiants | |
+| ENF1 | L'interface est utilisable sur tout support (mobile, tablette, desktop) | Test manuel sur un écran de 375px de large (mobile) et un écran desktop classique, sans scroll horizontal ni élément coupé |
+| ENF2 | Le tableau du formateur répond en moins de 2 s pour une promotion de 60 étudiants | Mesure du temps de réponse de l'endpoint /api/tableau avec un jeu de données de démonstration de 60 étudiants |
+| ENF3 | Le format d'erreur JSON est identique pour toutes les erreurs de l'API | Vérification manuelle : chaque code d'erreur (400, 403, 404, 409, 410) renvoie bien { code, message } |
+| ENF4 | Aucune donnée sensible n'est stockée, puisque l'authentification se fait par choix de nom | Revue du modèle de données : pas de champ mot de passe dans l'entité Étudiant |
 
 ## 6. Règles de gestion
 
