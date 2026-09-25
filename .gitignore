@@ -1,0 +1,57 @@
+# ============================================================
+# .gitignore — posé AVANT le premier commit de code
+# ============================================================
+
+# ---------- Java / Maven ----------
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+.mvn/timing.properties
+# NOTE : .mvn/wrapper/maven-wrapper.jar et maven-wrapper.properties sont
+# commités volontairement — sans eux, mvnw ne fonctionne pas sur un clone vierge.
+
+# ---------- Node / frontend ----------
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+
+# ---------- Environnement et secrets ----------
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+*.pem
+*.key
+
+# ---------- Base de données locale ----------
+postgres-data/
+*.sql.gz
+*.dump
+
+# ---------- IDE et système ----------
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# ---------- Divers ----------
+*.log
+logs/
+tmp/
