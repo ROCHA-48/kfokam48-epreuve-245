@@ -21,11 +21,11 @@ Cette application s'adresse au formateur et à l'étudiant. Pour le formateur, e
 
 | Acteur | Ce qu'il peut faire | Ce qu'il ne peut pas faire |
 |---|---|---|
-| Formateur | | |
-| Étudiant | | |
-| Relecteur | | |
+| **Formateur** | Ouvrir une session et obtenir un code de présence (Q2) · Voir le tableau récapitulatif par étudiant (Q16) · Ajouter une présence manuellement, marquée « ajouté par le formateur » (Q14) · Clôturer une session | Modifier une note envoyée par un relecteur (Q15) · Relire un exercice à la place d'un étudiant |
+| **Étudiant** | Marquer sa présence avec un code, tant qu'il est valide (Q2, Q3) · Déposer le lien de son exercice, et le remplacer tant que personne ne l'a relu (Q13) · Voir sa note et le commentaire reçu, sans connaître l'identité du relecteur (Q8) | Se relire lui-même (Q5) · Choisir qui le relit (Q7) · Voir le nom de son relecteur (Q8) · Marquer sa présence après expiration du code (Q2) |
+| **Relecteur** *(= un étudiant, désigné au hasard parmi les présents pour relire l'exercice d'un pair — Q7)* | Rendre une note (0–20, entière) et un commentaire (Q9) · Corriger sa note tant que la session n'est pas clôturée *(→ voir décision en section 7, contradiction Q10/Q15)* | Relire son propre exercice (Q5) · Relire plusieurs exercices pour le même exercice (un seul relecteur — Q6) |
 
-*Le relecteur est-il un acteur distinct ou un étudiant dans un certain état ? Ta réponse a des conséquences sur ton modèle de données. Tranche-la ici.*
+Le relecteur n'est pas un acteur distinct : c'est un étudiant, désigné temporairement par le système pour relire l'exercice d'un pair (Q7). Il n'existe pas de compte "relecteur" séparé — une même personne est tour à tour étudiant qui dépose, et relecteur d'un autre exercice.
 
 ## 3. Périmètre
 
