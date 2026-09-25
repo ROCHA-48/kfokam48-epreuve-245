@@ -50,8 +50,14 @@ Le relecteur n'est pas un acteur distinct : c'est un étudiant, désigné tempor
 | Réf | Exigence | Critère d'acceptation | Priorité |
 |---|---|---|---|
 | EF1 | L'étudiant marque sa présence à l'aide d'un code | Quand je saisis un code valide et non expiré, ma présence apparaît dans le tableau du formateur | Must |
-| EF2 | | | |
-| EF3 | | | |
+| EF2 | Le formateur ouvre une session et obtient un code de présence | Quand je remplis titre et promotion et que je valide, j'obtiens un code affiché avec sa date d'expiration | Must |
+| EF3 | L'étudiant dépose le lien de son exercice | Quand je saisis un lien valide pour une session où j'étais présent, l'exercice apparaît avec le statut « en attente de relecture » | Must |
+| EF4 | Le système assigne un relecteur à un exercice déposé | Quand un exercice est déposé, un étudiant présent différent de l'auteur est désigné automatiquement comme relecteur | Must |
+| EF5 | Le relecteur rend une note et un commentaire | Quand je saisis une note entière entre 0 et 20 et un commentaire, la relecture est enregistrée et visible par l'étudiant relu | Must |
+| EF6 | L'étudiant voit sa note et son commentaire sans connaître le relecteur | Quand ma relecture est rendue, je vois la note et le commentaire, mais aucune information sur qui m'a relu | Must |
+| EF7 | Le formateur voit un tableau récapitulatif par étudiant | Quand j'affiche le tableau pour ma promotion, je vois pour chaque étudiant sa présence, ses dépôts, sa moyenne et ses relectures en attente | Must |
+| EF8 | Le formateur ajoute une présence manuellement | Quand j'ajoute une présence pour un étudiant absent du pointage automatique, elle apparaît marquée « ajouté par le formateur » | Should |
+| EF9 | L'étudiant remplace le lien de son exercice | Quand je modifie mon lien avant que la relecture n'ait commencé, le nouveau lien remplace l'ancien | Should |
 
 *Un critère d'acceptation se formule « quand … alors … ». S'il n'est pas vérifiable par quelqu'un d'autre que toi, ce n'en est pas un.*
 
