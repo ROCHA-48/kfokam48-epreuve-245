@@ -1,46 +1,44 @@
 # Soumission — Épreuve finale fullstack KFOKAM48
 
-> Remplis ce fichier, **vérifie tes deux liens depuis une fenêtre de navigation privée**,
-> puis téléverse-le sur la plateforme **avant 18h00**.
-> Sans ce dépôt sur la plateforme, tu n'as rien rendu.
-
----
-
 ## Candidat
 
 | | |
 |---|---|
-| Nom et prénom(s) | |
-| Matricule | KF48-___-___ |
-| Centre | Yaoundé / Douala / Bafoussam |
-| Compte GitHub | |
+| Nom et prénom(s) | ROCHA Wilson |
+| Matricule | 245 |
+| Centre | Yaoundé *(à confirmer : garder le centre réel et supprimer les autres)* |
+| Compte GitHub | ROCHA-48 |
 
 ## Projet
 
 | | |
 |---|---|
-| Dépôt (public) | `https://github.com/<compte>/kfokam48-epreuve-<matricule>` |
-| Commit final — hash complet, 40 caractères | |
+| Dépôt (public) | `https://github.com/ROCHA-48/kfokam48-epreuve-245` |
+| Commit final — hash complet, 40 caractères | *(à coller après le dernier push)* |
 | Branche | `main` |
 
 ## Épreuve Git — étape 5
 
 | | |
 |---|---|
-| Dépôt (public) | `https://github.com/<compte>/kfokam48-gitlab-<matricule>` |
-| Commit final — hash complet, 40 caractères | |
+| Dépôt (public) | `https://github.com/ROCHA-48/kfokam48-gitlab-245` |
+| Commit final — hash complet, 40 caractères | *(à coller après le dernier push)* |
 
 ## Technique
 
 | | |
 |---|---|
-| Frontend utilisé | React / Angular / Next.js |
-| Base de données | |
-| Commandes de démarrage | |
+| Frontend utilisé | React 18 avec Vite et TypeScript |
+| Base de données | PostgreSQL 16 (conteneur `docker compose`), schéma versionné par Flyway |
+| Commandes de démarrage | `docker compose up -d db` · `cd backend && ./mvnw spring-boot:run` · `cd frontend && npm install && npm run dev` |
 
 ## Ce que j'ai livré
 
-*Trois à cinq lignes : ce qui fonctionne, ce qui ne fonctionne pas, ce que j'ai volontairement laissé de côté et pourquoi. Sois exact — un correcteur préfère un périmètre réduit et annoncé qu'une promesse non tenue.*
+Fonctionne : ouverture d'une session avec code de présence valable 15 minutes (RG1), pointage par code avec les erreurs `400 CODE_INCONNU`, `409 DEJA_PRESENT` et `410 CODE_EXPIRE`, blocage deux minutes après cinq codes erronés (RG10), dépôt et remplacement du lien d'un exercice, attribution automatique d'un relecteur au hasard parmi les présents et jamais l'auteur, note entière de 0 à 20 corrigeable jusqu'à la clôture, tableau du formateur avec moyenne calculée par l'API, clôture de session et présence ajoutée à la main marquée `FORMATEUR` (Q14), trois écrans React, et 14 tests verts sans base locale.
+
+Ne fonctionne pas / non livré : la suppression d'une présence ajoutée par erreur (issue #17) reste hors périmètre, c'est écrit en Z7 du cahier des charges ; il n'y a aucune authentification, décision assumée du client (Q1, zone d'ombre Z6).
+
+Volontairement laissé de côté : le style visuel, non noté par le sujet, et toute notification automatique (email, SMS), hors périmètre.
 
 ---
 
@@ -57,4 +55,4 @@
 
 **Déclaration.** J'ai réalisé ce travail seul. Les outils d'IA étaient autorisés sans restriction et je les ai utilisés ; mon journal indique où et comment j'ai vérifié leurs réponses. Mes dépôts resteront publics et inchangés jusqu'à la publication des résultats.
 
-Signature : ______________________  Date : __________
+Signature : ROCHA Wilson  Date : 25/09/2026

@@ -20,10 +20,10 @@ Première version livrée : les stories **Must** et deux stories **Should**.
 - `POST /api/sessions/{id}/cloture` — clôture définitive (issue #13, EF10, RG14).
 - `POST /api/presences/formateur` — présence manuelle marquée source `FORMATEUR` (issue #14, EF8, Q14).
 - `PUT /api/exercices/{id}/lien` — remplacement du lien tant que la relecture n'est pas rendue (issue #15, EF9, RG8).
+- Correction d'une note déjà envoyée tant que la session n'est pas clôturée, puis note définitive après la clôture (issue #16, EF12, RG11, arbitrage C1).
 - Trois écrans React avec couche API dédiée et états de chargement et d'erreur (F2, F3).
-- 13 tests : règle métier du tirage au sort (unitaire) et endpoint `POST /api/presences` (intégration), verts sans base locale (B6).
+- 14 tests : règle métier du tirage au sort (unitaire) et endpoint `POST /api/presences` (intégration), verts sans base locale (B6).
 
 ### Non livré dans cette version
 
-- Correction d'une note après envoi (issue #16, EF12) — reportée au premier correctif.
-- Suppression d'une présence ajoutée par erreur (issue #17) — hors périmètre assumé (Z7).
+- Suppression d'une présence ajoutée par erreur (issue #17) — hors périmètre assumé, documenté en Z7 du cahier des charges.
