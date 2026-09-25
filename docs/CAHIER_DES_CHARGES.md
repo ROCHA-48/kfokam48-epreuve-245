@@ -87,6 +87,18 @@ Le relecteur n'est pas un acteur distinct : c'est un étudiant, désigné tempor
 | RG11 | Un relecteur peut corriger sa note tant que le formateur n'a pas clôturé la session (décision tranchée en section 7, contradiction avec Q15) | Q10 |
 | RG12 | Une présence ne peut pas être marquée après l'expiration du code | Q2, Q3 |
 
+## 6.bis Réponses en conflit
+
+| Conflit | Ce que j'ai choisi | Pourquoi |
+|---|---|---|
+| Q10 vs Q15 : le relecteur peut-il corriger sa note après l'avoir envoyée ? | Je retiens Q10 : le relecteur peut corriger sa note tant que le formateur n'a pas clôturé la session | Q10 répond précisément à la question opérationnelle posée (« peut-il corriger ? »), avec une condition claire et actionnable (clôture de session). Q15 énonce un principe plus général, formulé après coup. En cas de doute, je privilégie la réponse la plus spécifique et la plus récente dans l'échange avec le client, et celle qui laisse le plus de marge de correction en cas d'erreur du relecteur — plus juste pour l'étudiant noté. |
+
+## 6.ter Points que la demande ne tranche pas
+
+| Point | Réponse client (Qx) ou hypothèse | Décision retenue | Conséquence |
+|---|---|---|---|
+| Que se passe-t-il si aucun étudiant présent (autre que l'auteur) n'est disponible pour être désigné relecteur (ex : un seul étudiant présent à la session) ? | Aucune des 16 questions ne couvre ce cas | L'exercice reste au statut « en attente d'assignation » jusqu'à ce qu'un relecteur potentiel devienne disponible (nouvel étudiant marquant sa présence) ; le tableau du formateur doit distinguer ce cas de « en attente de relecture » (RG9) | RG9 précisée : deux statuts distincts « en attente d'assignation » et « en attente de relecture » |
+
 *Numérote-les. Tu les citeras dans tes issues, tes messages de commit et tes tests. Une règle qu'on ne peut pas citer est une règle qu'on oublie.*
 
 ## 7. Zones d'ombre, hypothèses et contradictions
