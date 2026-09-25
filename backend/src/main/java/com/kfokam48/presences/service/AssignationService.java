@@ -37,11 +37,16 @@ public class AssignationService {
         this.relectureRepository = relectureRepository;
     }
 
-    /** Assigne un relecteur aux exercices de la session qui attendent encore. */
+    /**
+     * Assigne un relecteur aux exercices de la session qui attendent encore.
+     * Issue #18 : les exercices en attente sont verrouilles (PESSIMISTIC_WRITE)
+     * pour que deux pointages simultanes se serialisent ici ; le second relit
+     * le statut apres verrou et ne retente plus une assignation deja faite.
+     */
     @Transactional
     public void assignerLesExercicesEnAttente(SessionCours session) {
         List<Exercice> enAttente = exerciceRepository
-                .findByStatutAndSessionId(StatutExercice.EN_ATTENTE_ASSIGNATION, session.getId());
+                .lockerLesExercicesEnAttente(StatutExercice.EN_ATTENTE_ASSIGNATION, session.getId());
         if (enAttente.isEmpty()) {
             return;
         }
@@ -50,6 +55,9 @@ public class AssignationService {
                 .toList());
 
         for (Exercice exercice : enAttente) {
+            if (exercice.getStatut() != StatutExercice.EN_ATTENTE_ASSIGNATION) {
+                continue; // deja assigne par la transaction concurrente (issue #18)
+            }
             Optional<Etudiant> relecteur = attribution.choisir(presents, exercice.getEtudiant());
             if (relecteur.isEmpty()) {
                 continue; // Z1 : reste EN_ATTENTE_ASSIGNATION, jamais perdu
