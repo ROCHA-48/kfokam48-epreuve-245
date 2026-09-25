@@ -51,11 +51,11 @@ Les minutes d'attente ont servi à vérifier deux règles que mes treize tests n
 
 ## Étape 4 — Version finale
 
-**Fait :**
+**Fait :** jalon `[JALON] v1.0` posé et poussé. CHANGELOG v1.0 relu contre l'historique commit par commit (issue #16, correctif du 500 sur `GET /api/relectures/{id}`, validation des quatre diagrammes au rendu). Backlog restant trié : plus aucun Must ni Should en attente, issue #17 maintenue hors périmètre avec sa justification (Z7). README relu puis sa procédure rejouée comme le fera le correcteur : base par `docker compose`, API démarrée, données de démonstration présentes, `GET /api/tableau` conforme au contrat (moyenne calculée par l'API, `404 PROMOTION_INCONNUE` au format imposé), 14 tests verts, build frontend OK. Au passage, une erreur attrapée : le README annonçait 13 tests pour 14 réels — corrigé.
 
-**Bloqué :**
+**Bloqué :** le port 8080 était occupé sur le poste au moment de rejouer le README. C'est exactement le cas de repli documenté (API sur 8090 + `VITE_API_URL`) : il a fonctionné du premier coup, ce qui valide la procédure de secours elle-même.
 
-**IA :**
+**IA :** a rédigé le CHANGELOG v1.0 et la mise à jour du backlog. Vérifié avant d'accepter : chaque ligne « Ajouté »/« Corrigé » relue contre l'historique (`git log`, `git show 32dde37`), et toutes les affirmations du CHANGELOG et du README rejouées en vrai (`./mvnw test`, `npm run build`, démarrage complet, appels `curl`). C'est cette vérification qui a sorti le chiffre faux des tests : l'IA avait repris « 13 » du README au lieu des rapports Surefire (4 + 10 = 14).
 
 ---
 
