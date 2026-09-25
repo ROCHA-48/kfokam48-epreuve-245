@@ -2,6 +2,7 @@ package com.kfokam48.presences.web.erreur;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -52,6 +53,21 @@ public class GestionnaireErreurs {
     public ResponseEntity<ReponseErreur> gererRequeteIllisible(Exception ex) {
         return ResponseEntity.badRequest()
                 .body(new ReponseErreur("DONNEE_INVALIDE", "Le corps de la requete est invalide ou incomplet."));
+    }
+
+    /**
+     * Issue #18 : une course entre deux requetes simultanees peut faire echouer
+     * une insertion sur une contrainte UNIQUE (presence deja pointee, relecture
+     * deja assignee) malgre la verification prealable. La base est l'arbitre
+     * final : la requete perdante sort en 409 au format du contrat, jamais en 500,
+     * et peut etre rejouee.
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ReponseErreur> gererConflitDIntegrite(DataIntegrityViolationException ex) {
+        log.warn("Conflit d'integrite : {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new ReponseErreur("DEJA_PRESENT",
+                        "Cette information est deja enregistree — un traitement simultane vient de la prendre."));
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
