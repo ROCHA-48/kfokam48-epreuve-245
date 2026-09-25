@@ -24,11 +24,11 @@ Chaque entrée répond aux trois mêmes questions :
 
 ## Étape 2 — Première version
 
-**Fait :**
+**Fait :** socle Spring Boot 3 / Java 17 avec `mvnw` commité, PostgreSQL 16 par `docker compose` et schéma versionné par Flyway (migrations V1 et V2, `ddl-auto=validate`). Les quinze opérations d'API du contrat sont en place : les cinq imposées plus la clôture de session, la présence manuelle du formateur, le remplacement de lien, les listes et les relectures à faire. Les trois écrans React sont livrés (formateur, étudiant, relecteur) avec une couche API unique et des états de chargement et d'erreur. `README` en trois commandes, `CHANGELOG` v0.1, et jalon `[JALON] v0.1` poussé.
 
-**Bloqué :**
+**Bloqué :** 25 min sur Docker 29, dont l'API minimale a été relevée : Testcontainers, fourni par Spring Boot 3.3.5, n'arrive plus à se connecter au démon. J'ai d'abord tenté de surcharger sa version, sans succès, puis j'ai basculé le test d'intégration sur H2 en mémoire avec `ddl-auto=create-drop` dans le seul scope test — conforme à B6 et à B5, et surtout vérifiable sur ce poste. 15 min de plus sur les conflits de ports : 5432 et 8080 étaient déjà pris par d'autres projets de la machine, j'ai donc déplacé PostgreSQL sur 5433 et vérifié l'API sur 8090, sans toucher aux autres conteneurs. Enfin, un test manuel au `curl` a montré que ma note hors bornes renvoyait `DONNEE_INVALIDE` au lieu de `NOTE_INVALIDE` et mon lien mal formé `DONNEE_INVALIDE` au lieu de `LIEN_INVALIDE` : écart au contrat corrigé, puis couvert par deux tests supplémentaires.
 
-**IA :**
+**IA :** a écrit le socle backend, les contrôleurs, les trois écrans et les tests. Je ne l'ai pas crue sur parole : j'ai compilé, lancé les treize tests (`mvn test`), démarré l'application contre le vrai PostgreSQL et appelé chaque opération imposée au `curl` pour comparer le code HTTP et le corps de la réponse avec `api/contrat.yaml` — c'est comme ça que l'écart `NOTE_INVALIDE` est sorti. J'ai aussi vérifié, script à l'appui, que les cinq opérations imposées du contrat n'avaient pas été touchées par mes ajouts.
 
 ---
 
