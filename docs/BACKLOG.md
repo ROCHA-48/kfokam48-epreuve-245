@@ -7,6 +7,8 @@ Chaque issue s'appuie sur le cahier des charges (`docs/CAHIER_DES_CHARGES.md`) :
 
 **Ordre de traitement :** les Must de l'étape 2, puis les Should, puis les Could si le temps le permet.
 
+**État au 25/09 (v0.1) :** les issues #1 à #15 sont livrées et couvertes par les tests ; l'issue #16 (correction d'une note avant la clôture) est livrée avec son test d'intégration ; l'issue #17 (suppression d'une présence) reste hors périmètre, décision documentée en Z7. Le reste du backlog sera trié à l'étape 4.
+
 | # | Titre | Priorité | Renvoi |
 |---|---|---|---|
 | 1 | Choisir son nom dans la liste des étudiants | Must | Q1, ENF4, Z6 |

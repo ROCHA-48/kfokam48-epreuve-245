@@ -7,7 +7,11 @@ import com.kfokam48.presences.domain.SessionCours;
 import com.kfokam48.presences.domain.SourcePresence;
 import com.kfokam48.presences.repository.EtudiantRepository;
 import com.kfokam48.presences.repository.PresenceRepository;
+import com.kfokam48.presences.domain.Exercice;
+import com.kfokam48.presences.domain.Relecture;
+import com.kfokam48.presences.repository.ExerciceRepository;
 import com.kfokam48.presences.repository.PromotionRepository;
+import com.kfokam48.presences.repository.RelectureRepository;
 import com.kfokam48.presences.repository.SessionCoursRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -51,6 +55,10 @@ class PresenceControllerIntegrationTest {
     private SessionCoursRepository sessionRepository;
     @Autowired
     private PresenceRepository presenceRepository;
+    @Autowired
+    private ExerciceRepository exerciceRepository;
+    @Autowired
+    private RelectureRepository relectureRepository;
 
     private Promotion promotion;
     private Etudiant awa;
@@ -59,6 +67,8 @@ class PresenceControllerIntegrationTest {
 
     @BeforeEach
     void preparerLesDonnees() {
+        relectureRepository.deleteAll();
+        exerciceRepository.deleteAll();
         presenceRepository.deleteAll();
         sessionRepository.deleteAll();
         etudiantRepository.deleteAll();
@@ -196,5 +206,38 @@ class PresenceControllerIntegrationTest {
         mockMvc.perform(get("/api/tableau").param("promotionId", "999999"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value("PROMOTION_INCONNUE"));
+    }
+
+    @Test
+    @DisplayName("La note est corrigeable avant la cloture, puis figee (EF12, RG11, C1)")
+    void corrigeUneNoteAvantLaCloture() throws Exception {
+        presenceRepository.save(new Presence(session, awa, SourcePresence.ETUDIANT, Instant.now()));
+        Exercice exercice = exerciceRepository.save(new Exercice(session, awa, "https://github.com/ROCHA-48/exercice-awa"));
+        Relecture relecture = relectureRepository.save(new Relecture(exercice, elsa));
+
+        mockMvc.perform(post("/api/relectures/" + relecture.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"note\":12,\"commentaire\":\"Premier passage.\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.note").value(12));
+
+        // Correction avant la cloture : Q10 l'emporte sur Q15 (arbitrage C1)
+        mockMvc.perform(post("/api/relectures/" + relecture.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"note\":18,\"commentaire\":\"Note corrigee apres relecture du code.\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.note").value(18));
+
+        assertThat(relectureRepository.findById(relecture.getId()).orElseThrow().getNote()).isEqualTo(18);
+
+        // Apres la cloture de la session, la note est definitive
+        session.setClotureAt(Instant.now());
+        sessionRepository.save(session);
+
+        mockMvc.perform(post("/api/relectures/" + relecture.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"note\":20,\"commentaire\":\"Trop tard.\"}"))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("RELECTURE_DEJA_RENDUE"));
     }
 }
