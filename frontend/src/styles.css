@@ -1,0 +1,22 @@
+/* Le rendu visuel n'est pas note : ce fichier reste volontairement minimal. */
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; margin: 0; background: #f7f7f8; color: #16181d; }
+.application { max-width: 1100px; margin: 0 auto; padding: 1rem; }
+header { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; border-bottom: 2px solid #d7dae0; padding-bottom: .75rem; }
+h1 { font-size: 1.15rem; margin: 0; }
+nav { display: flex; gap: .75rem; }
+nav a { text-decoration: none; color: #1b4fd8; font-weight: 600; }
+section { background: #fff; border: 1px solid #e2e4e9; border-radius: 6px; padding: 1rem; margin-top: 1rem; }
+h2 { font-size: 1rem; margin-top: 0; }
+table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+th, td { text-align: left; padding: .4rem .5rem; border-bottom: 1px solid #eceef2; }
+.champ { display: flex; flex-direction: column; gap: .25rem; font-size: .85rem; }
+input, select, textarea, button { padding: .45rem; font: inherit; border: 1px solid #c9ced6; border-radius: 4px; }
+button { background: #1b4fd8; color: #fff; border: none; cursor: pointer; }
+button:disabled { background: #9aa6c4; cursor: not-allowed; }
+.ligne-formulaire { display: flex; flex-wrap: wrap; gap: .75rem; align-items: end; margin-bottom: .75rem; }
+.etat { padding: .5rem; border-radius: 4px; font-size: .9rem; }
+.chargement { background: #eef2ff; }
+.erreur { background: #fdecec; color: #a11; }
+.vide { background: #f2f4f7; color: #556; }
+.code { font-size: 1.6rem; font-weight: 700; letter-spacing: .15em; }
