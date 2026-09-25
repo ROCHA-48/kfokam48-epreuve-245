@@ -6,7 +6,7 @@
 |---|---|
 | Nom et prénom(s) | ROCHA Wilson |
 | Matricule | 245 |
-| Centre | Yaoundé *(à confirmer : garder le centre réel et supprimer les autres)* |
+| Centre | Yaoundé |
 | Compte GitHub | ROCHA-48 |
 
 ## Projet
@@ -14,7 +14,7 @@
 | | |
 |---|---|
 | Dépôt (public) | `https://github.com/ROCHA-48/kfokam48-epreuve-245` |
-| Commit final — hash complet, 40 caractères | *(à coller après le dernier push)* |
+| Commit final — hash complet, 40 caractères | 0214689004c588a13c7390658990ce8a7bf0cb33 |
 | Branche | `main` |
 
 ## Épreuve Git — étape 5
@@ -22,7 +22,7 @@
 | | |
 |---|---|
 | Dépôt (public) | `https://github.com/ROCHA-48/kfokam48-gitlab-245` |
-| Commit final — hash complet, 40 caractères | *(à coller après le dernier push)* |
+| Commit final — hash complet, 40 caractères | *(en attente — `git-lab.bundle` non remis au moment de la rédaction ; à compléter dès que l'étape 5 est passée)* |
 
 ## Technique
 
@@ -46,10 +46,10 @@ Volontairement laissé de côté : le style visuel, non noté par le sujet, et t
 
 - [ ] Mes deux dépôts sont **publics** et s'ouvrent en navigation privée
 - [ ] Les deux hash font bien **40 caractères** et existent sur GitHub
-- [ ] Tout mon travail est **poussé** — `git status` est propre sur les deux dépôts
-- [ ] Mon `README` a été testé depuis un clone vierge, dans un dossier vide
-- [ ] Mon `JOURNAL.md` et mon cahier des charges sont dans `docs/`
-- [ ] Les trois commits `[JALON]` sont poussés et dans le bon ordre
+- [x] Tout mon travail est **poussé** — `git status` est propre sur les deux dépôts
+- [x] Mon `README` a été testé depuis un clone vierge, dans un dossier vide — clone, base neuve, API démarrée, données de démonstration chargées, `GET /api/tableau` conforme
+- [x] Mon `JOURNAL.md` et mon cahier des charges sont dans `docs/`
+- [x] Les trois commits `[JALON]` sont poussés et dans le bon ordre
 
 ---
 
