@@ -381,7 +381,7 @@ paths:
 
   /api/etudiants/{etudiantId}/notes-recues:
     get:
-      summary: Les notes reçues par cet étudiant, sans l'identité du relecteur (Q8, RG5)
+      summary: Les notes reçues par cet étudiant, sans l'identité du relecteur (Q8, RG5). Issue #19 : chaque note porte le statut provisoire tant que l'autre relecteur de l'exercice n'a pas rendu.
       parameters:
         - name: etudiantId
           in: path
@@ -398,13 +398,14 @@ paths:
                 type: array
                 items:
                   type: object
-                  required: [relectureId, exerciceId, note, commentaire, rendueAt]
+                  required: [relectureId, exerciceId, note, commentaire, rendueAt, provisoire]
                   properties:
                     relectureId: { type: integer, format: int64 }
                     exerciceId: { type: integer, format: int64 }
                     note: { type: integer, minimum: 0, maximum: 20 }
                     commentaire: { type: string }
                     rendueAt: { type: string, format: date-time }
+                    provisoire: { type: boolean, description: "Vrai tant que tous les relecteurs assignés à cet exercice n'ont pas rendu — la note retenue sera la moyenne des deux (issue #19)" }
         "404": { $ref: "#/components/responses/Erreur" }   # ETUDIANT_INCONNU
 
   /api/relectures/{relectureId}:

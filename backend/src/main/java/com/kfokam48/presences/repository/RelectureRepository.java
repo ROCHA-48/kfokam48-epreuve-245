@@ -10,7 +10,24 @@ import java.util.Optional;
 
 public interface RelectureRepository extends JpaRepository<Relecture, Long> {
 
-    Optional<Relecture> findByExerciceId(Long exerciceId);
+    /**
+     * Issue #19 : un exercice peut avoir deux relectures. Les usages « y a-t-il
+     * deja une relecture pour cet exercice ? » prennent la premiere (par identifiant
+     * croissant) : suffit pour « relecture commencee ? » (remplacement de lien) et
+     * pour le detail par defaut.
+     */
+    Optional<Relecture> findFirstByExerciceIdOrderByIdAsc(Long exerciceId);
+
+    /** Issue #19 : les relectures deja posees sur cet exercice (au plus deux). */
+    List<Relecture> findByExerciceIdOrderByIdAsc(Long exerciceId);
+
+    /**
+     * Issue #19 : la nouvelle tentative d'assignation ne vise que le premier
+     * relecteur manquant — la contrainte UNIQUE (exercice_id, relecteur_id)
+     * reste la garantie anti-doublon, et le second relecteur est toujours
+     * distinct du premier et de l'auteur (choisi dans le service).
+     */
+    boolean existsByExerciceIdAndRelecteurId(Long exerciceId, Long relecteurId);
 
     /**
      * Detail d'une relecture : l'exercice est charge en meme temps (join fetch),
@@ -37,7 +54,7 @@ public interface RelectureRepository extends JpaRepository<Relecture, Long> {
             """)
     List<Relecture> notesRecues(@Param("etudiantId") Long etudiantId);
 
-    /** Moyenne des notes recues sur la promotion, null si aucune note (contrat : nullable). */
+    /** Issue #19 : moyenne des notes recues — chaque relecture rendue compte, donc deux relecteurs pèsent deux fois ; null si aucune note (contrat : nullable). */
     @Query("""
             select avg(r.note) from Relecture r
             where r.exercice.etudiant.id = :etudiantId
@@ -56,4 +73,10 @@ public interface RelectureRepository extends JpaRepository<Relecture, Long> {
     List<Relecture> findByExerciceSessionIdAndRendueAtIsNull(Long sessionId);
 
     List<Relecture> findByRelecteurId(Long relecteurId);
+
+    /** Issue #19 : combien de relecteurs sont assignes a cet exercice (un ou deux). */
+    long countByExerciceId(Long exerciceId);
+
+    /** Issue #19 : combien ont deja rendu — la note est provisoire tant que ce compte est inferieur au precedent. */
+    long countByExerciceIdAndRendueAtIsNotNull(Long exerciceId);
 }

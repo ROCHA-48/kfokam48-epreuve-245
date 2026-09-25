@@ -8,13 +8,14 @@ import lombok.Setter;
 import java.time.Instant;
 
 /**
- * Un seul relecteur par exercice (Q6). Le relecteur est toujours different de
- * l'auteur (Q5) : la regle est portee par le service, une contrainte SQL ne
- * pouvant pas comparer deux tables.
+ * Deux relecteurs distincts par exercice (issue #19, ancienne regle RG4 issue de Q6).
+ * Le relecteur est toujours different de l'auteur (Q5) : la regle est portee par le
+ * service, une contrainte SQL ne pouvant pas comparer deux tables.
  */
 @Entity
 @Table(name = "relecture",
-        uniqueConstraints = @UniqueConstraint(name = "uk_relecture_exercice", columnNames = "exercice_id"))
+        uniqueConstraints = @UniqueConstraint(name = "uk_relecture_exercice_relecteur",
+                columnNames = {"exercice_id", "relecteur_id"}))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,7 +25,7 @@ public class Relecture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "exercice_id", nullable = false)
     private Exercice exercice;
 

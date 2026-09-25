@@ -45,7 +45,7 @@ Les minutes d'attente ont servi à vérifier deux règles que mes treize tests n
 
 **IA :** m'a prévenu que les deux fichiers étaient absents plutôt que de simuler l'ouverture de l'enveloppe, puis a rédigé le script qui rejoue ces deux scénarios. Je l'ai relu avant de le lancer et j'ai comparé chaque réponse aux sources : le message de blocage avec la réponse à la question 4 de `CLIENT.md`, et le statut `EN_ATTENTE_ASSIGNATION` avec la zone d'ombre Z1 que j'ai moi-même documentée au cahier des charges — les deux doivent dire la même chose, sinon c'est le cahier des charges qui est faux.
 
-**Ce que j'ai sorti du périmètre pour absorber le changement, et pourquoi :** à décider une fois l'enveloppe ouverte.
+**Ce que j'ai sorti du périmètre pour absorber le changement, et pourquoi :** le changement (issue #19, deux relecteurs) est un Must qui arrive tard : j'écarte donc **définitivement l'issue #17** (suppression d'une présence ajoutée par erreur, Could) — son cas d'usage est rare, il ne justifie pas de toucher à la cohérence du tableau à cette échéance, et il était déjà documenté comme exclu en Z7. Second sacrifice assumé : le remplacement du lien ne vérifie plus « la relecture est commencée » que sur la première relecture (par identifiant croissant) ; couvrir le cas « une rendue sur deux » exigerait un 409 par relecteur, ce que le client n'a jamais demandé.
 
 ---
 

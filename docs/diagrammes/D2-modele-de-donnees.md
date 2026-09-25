@@ -10,7 +10,7 @@ erDiagram
     ETUDIANT ||--o{ PRESENCE : "marque"
     SESSION ||--o{ EXERCICE : "porte"
     ETUDIANT ||--o{ EXERCICE : "dépose"
-    EXERCICE ||--o| RELECTURE : "reçoit au plus une"
+    EXERCICE ||--o{ RELECTURE : "reçoit deux relectures (issue #19)"
     ETUDIANT ||--o{ RELECTURE : "rédige (relecteur)"
 
     PROMOTION {
@@ -70,7 +70,7 @@ erDiagram
 |---|---|---|
 | Un étudiant ne pointe qu'une fois par session | `UNIQUE (session_id, etudiant_id)` sur `PRESENCE` | RG15, `409 DEJA_PRESENT` |
 | Un étudiant ne dépose qu'un exercice par session | `UNIQUE (session_id, etudiant_id)` sur `EXERCICE` | contrat, `409 EXERCICE_DEJA_DEPOSE`, Z8 |
-| Un exercice n'a qu'un seul relecteur | `UNIQUE (exercice_id)` sur `RELECTURE`, cardinalité `EXERCICE ||--o| RELECTURE` | Q6, RG4 |
+| Un exercice a au plus deux relectures, de relecteurs distincts | `UNIQUE (exercice_id, relecteur_id)` sur `RELECTURE`, cardinalité `EXERCICE ||--o{ RELECTURE` (max 2) | Issue #19 (ancienne règle RG4 issue de Q6) |
 | Jamais d'auto-relecture | `CHECK (relecteur_id <> auteur de l'exercice)`, vérifié en service | Q5, RG2 |
 | Une note est un entier de 0 à 20 | `CHECK (note BETWEEN 0 AND 20)` sur `RELECTURE` | Q9, RG3, `400 NOTE_INVALIDE` |
 | Le code d'une session est unique et retrouvable | `UNIQUE (code)` sur `SESSION` | Q2 |

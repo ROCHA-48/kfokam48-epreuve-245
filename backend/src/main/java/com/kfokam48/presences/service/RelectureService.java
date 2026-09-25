@@ -50,8 +50,14 @@ public class RelectureService {
         relecture.setNote(noteValidee);
         relecture.setCommentaire(commentaire);
         relecture.setRendueAt(Instant.now());
-        exercice.setStatut(StatutExercice.RELU);
-        exerciceRepository.save(exercice);
+
+        // Issue #19 : l'exercice n'est relu que lorsque TOUTES ses relectures
+        // (deux, ou une seule si le tirage n'avait qu'un candidat) sont rendues.
+        if (relectureRepository.findByExerciceIdOrderByIdAsc(exercice.getId()).stream()
+                .allMatch(Relecture::isRendue)) {
+            exercice.setStatut(StatutExercice.RELU);
+            exerciceRepository.save(exercice);
+        }
         return relectureRepository.save(relecture);
     }
 
@@ -87,5 +93,25 @@ public class RelectureService {
             throw ApiException.etudiantInconnu(etudiantId);
         }
         return relectureRepository.notesRecues(etudiantId);
+    }
+
+    /**
+     * Issue #19 : une note rendue est PROVISOIRE tant que tous les relecteurs
+     * assignes a cet exercice n'ont pas rendu le leur — elle devient definitive
+     * quand les deux ont rendu (ou le seul, si l'exercice n'en avait qu'un).
+     */
+    public record NoteRecue(Relecture relecture, boolean provisoire) {
+    }
+
+    @Transactional(readOnly = true)
+    public List<NoteRecue> notesRecuesAvecStatut(Long etudiantId) {
+        if (!etudiantRepository.existsById(etudiantId)) {
+            throw ApiException.etudiantInconnu(etudiantId);
+        }
+        return relectureRepository.notesRecues(etudiantId).stream()
+                .map(relecture -> new NoteRecue(relecture,
+                        relectureRepository.countByExerciceIdAndRendueAtIsNotNull(relecture.getExercice().getId())
+                                < relectureRepository.countByExerciceId(relecture.getExercice().getId())))
+                .toList();
     }
 }
