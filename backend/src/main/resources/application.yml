@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: kfokam48-presences
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/kfokam48}
+    username: ${SPRING_DATASOURCE_USERNAME:kfokam48}
+    password: ${SPRING_DATASOURCE_PASSWORD:kfokam48}
+
+  jpa:
+    # B5 : le schema est versionne par Flyway, Hibernate ne le modifie jamais.
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: UTC
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+
+# Q1/Q2 : duree de validite du code de presence et blocage apres erreurs (RG1, RG10)
+app:
+  presence:
+    validite-code-minutes: 15
+    tentatives-max: 5
+    blocage-minutes: 2

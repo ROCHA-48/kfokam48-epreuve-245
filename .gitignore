@@ -6,6 +6,7 @@
 target/
 *.class
 *.jar
+!.mvn/wrapper/maven-wrapper.jar
 *.war
 *.ear
 *.nar
