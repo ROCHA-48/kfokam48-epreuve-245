@@ -34,13 +34,18 @@ Chaque entrée répond aux trois mêmes questions :
 
 ## Étape 3 — Enveloppe
 
-**Fait :**
+**Fait :** rien encore — l'enveloppe n'est pas disponible (voir Bloqué). Ce qui a avancé pendant l'attente : deux règles du cahier des charges vérifiées sur l'application réelle, contre PostgreSQL, et non seulement dans les tests automatisés.
 
-**Bloqué :**
+**Bloqué :** 25 min, et c'est le blocage le plus coûteux de la journée. `./enveloppe` et `git-lab.bundle` ne sont pas dans le dossier reçu : j'ai listé l'archive distribuée (`EPREUVE_KFOKAM48_ETUDIANTS.zip`) — elle ne contient que les huit documents du sujet, SUJET, CLIENT, `api/contrat.yaml`, LISEZ-MOI et les trois modèles — et une recherche sur tout le disque (`find ~ -iname "*enveloppe*" -o -iname "*.bundle"`) ne renvoie rien. Ces deux fichiers sont remis pendant l'épreuve : le jalon `[JALON] v0.1` étant poussé, l'enveloppe est débloquée et a été réclamée.
 
-**IA :**
+Les minutes d'attente ont servi à vérifier deux règles que mes treize tests ne couvraient pas, en appelant l'API contre PostgreSQL :
 
-**Ce que j'ai sorti du périmètre pour absorber le changement, et pourquoi :**
+- **Blocage après cinq codes erronés (Q4)** : cinq tentatives avec un code inexistant répondent `400 CODE_INCONNU`, puis la sixième — cette fois avec le **bon** code — répond elle aussi `400 CODE_INCONNU` avec le message « Trop d'essais : réessayez dans 1 min 59 s ». Le blocage masque donc un code valide : c'est ce qui rend l'attente utile contre la devinette, et c'est bien le comportement voulu par le client.
+- **Aucun relecteur disponible (Z1)** : un exercice déposé par le seul étudiant présent à la session reste en `EN_ATTENTE_ASSIGNATION`. Dès qu'un second étudiant marque sa présence, le même exercice bascule en `EN_ATTENTE_RELECTURE` et apparaît dans les relectures à faire du nouvel arrivant — sans qu'il ait pu s'assigner l'exercice de lui-même (RG9, RG13).
+
+**IA :** m'a prévenu que les deux fichiers étaient absents plutôt que de simuler l'ouverture de l'enveloppe, puis a rédigé le script qui rejoue ces deux scénarios. Je l'ai relu avant de le lancer et j'ai comparé chaque réponse aux sources : le message de blocage avec la réponse à la question 4 de `CLIENT.md`, et le statut `EN_ATTENTE_ASSIGNATION` avec la zone d'ombre Z1 que j'ai moi-même documentée au cahier des charges — les deux doivent dire la même chose, sinon c'est le cahier des charges qui est faux.
+
+**Ce que j'ai sorti du périmètre pour absorber le changement, et pourquoi :** à décider une fois l'enveloppe ouverte.
 
 ---
 

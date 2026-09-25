@@ -52,6 +52,9 @@ Thumbs.db
 *.swp
 *~
 
+# ---------- Sujet de l'epreuve recopie a la main : ne jamais le commiter ----------
+EPREUVE_KFOKAM48/
+
 # ---------- Divers ----------
 *.log
 logs/
