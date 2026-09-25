@@ -1,5 +1,31 @@
 # Journal des versions
 
+## v1.0 — 25/09/2026
+
+Version finale : toutes les stories Must et Should sont livrées, plus la story Could #16.
+L'enveloppe de l'étape 3 n'ayant pas été remise malgré le jalon `v0.1` poussé, aucun changement
+de besoin n'a été absorbé : le périmètre reste celui de l'analyse, maintenue à jour.
+
+### Ajouté
+
+- Issue #16 — une note reste corrigeable par le relecteur tant que la session n'est pas clôturée, puis elle est figée à la clôture (EF12, RG11, arbitrage C1).
+
+### Corrigé
+
+- `GET /api/relectures/{id}` répondait `500 ERREUR_INTERNE` au lieu du `200` du contrat : le lien de l'exercice était lu hors transaction (proxy JPA non initialisable). La relecture et son exercice sont désormais chargés ensemble (join fetch), couvert par une assertion du test d'intégration.
+
+### Vérifié
+
+- Les quatre diagrammes Mermaid passent le rendu `mermaid-cli` (SVG) : syntaxe correcte, affichage GitHub garanti.
+- Deux règles rejouées contre PostgreSQL, hors tests automatisés : blocage après cinq codes erronés (Q4) et statut `EN_ATTENTE_ASSIGNATION` puis reprise à la présence suivante (Z1).
+- Procédure du README rejouée en conditions réelles : base par `docker compose`, API démarrée, données de démonstration présentes, `GET /api/tableau` conforme au contrat, `404 PROMOTION_INCONNUE` au format imposé, 14 tests verts, build frontend OK.
+- CHANGELOG v1.0, backlog restant trié, journal à jour, README corrigé (13 tests annoncés pour 14 réels).
+
+### Périmètre assumé
+
+- Issue #17 (suppression d'une présence ajoutée par erreur) : hors périmètre, documenté en Z7 du cahier des charges.
+- Étape 3 : enveloppe non remise — la démarche prévue (issue d'abord, migration versionnée, contrat mis à jour, correctif séparé de l'évolution) est prête à être appliquée si elle arrive.
+
 ## v0.1 — 25/09/2026
 
 Première version livrée : les stories **Must** et deux stories **Should**.

@@ -53,10 +53,10 @@ Aucun mot de passe : l'identité est déclarative (Q1). Les trois écrans partag
 cd backend && ./mvnw test
 ```
 
-13 tests, verts sur un poste vierge, **sans base locale et sans Docker** (base H2 en mémoire) :
+14 tests, verts sur un poste vierge, **sans base locale et sans Docker** (base H2 en mémoire) :
 
 - `AttributionRelectureTest` — règle métier du tirage au sort : le relecteur n'est jamais l'auteur, il est choisi parmi les présents, et un exercice sans candidat reste sans relecteur (Q5, Q6, Q7, Z1).
-- `PresenceControllerIntegrationTest` — endpoint imposé `POST /api/presences` : 201, 400 `CODE_INCONNU`, 400 `DONNEE_INVALIDE`, 409 `DEJA_PRESENT`, 410 `CODE_EXPIRE`, plus `LIEN_INVALIDE`, `NOTE_INVALIDE`, le format du tableau et `404 PROMOTION_INCONNUE`.
+- `PresenceControllerIntegrationTest` — endpoint imposé `POST /api/presences` : 201, 400 `CODE_INCONNU`, 400 `DONNEE_INVALIDE`, 409 `DEJA_PRESENT`, 410 `CODE_EXPIRE`, plus `LIEN_INVALIDE`, `NOTE_INVALIDE`, le format du tableau, `404 PROMOTION_INCONNUE` et le détail d'une relecture (`GET /api/relectures/{id}`).
 
 ## Documentation
 

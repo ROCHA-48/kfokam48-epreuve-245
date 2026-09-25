@@ -7,7 +7,7 @@ Chaque issue s'appuie sur le cahier des charges (`docs/CAHIER_DES_CHARGES.md`) :
 
 **Ordre de traitement :** les Must de l'étape 2, puis les Should, puis les Could si le temps le permet.
 
-**État au 25/09 (v0.1) :** les issues #1 à #15 sont livrées et couvertes par les tests ; l'issue #16 (correction d'une note avant la clôture) est livrée avec son test d'intégration ; l'issue #17 (suppression d'une présence) reste hors périmètre, décision documentée en Z7. Le reste du backlog sera trié à l'étape 4.
+**État au 25/09 (v1.0) :** backlog vide de reste à faire — les issues #1 à #16 sont livrées et couvertes par les tests. L'issue #17 (suppression d'une présence) reste volontairement hors périmètre (Could, décision documentée en Z7 du cahier des charges) : le seul retrait légitime concerne une présence ajoutée à la main par erreur, et son cas d'usage rare ne justifie pas de toucher à la cohérence du tableau à cette échéance. Elle rouvrira en première story si le projet continue.
 
 | # | Titre | Priorité | Renvoi |
 |---|---|---|---|
