@@ -1,7 +1,7 @@
 # Cahier des charges — <nom de ton application>
 
 **Auteur :** ROCHA Wilson · 245
-**Version :** 1 · **Date :** <date>
+**Version :** 1 · **Date :** 25/09/2026
 **Frontend choisi :** React, parce que c'est le framework que je maîtrise le mieux et qui permet d'aller vite sur les trois écrans demandés.
 
 > Ce squelette est à remplir, pas à recopier. Les dix sections sont imposées et dans cet ordre.
