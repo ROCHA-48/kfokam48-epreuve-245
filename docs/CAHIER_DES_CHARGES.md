@@ -30,12 +30,20 @@ Le relecteur n'est pas un acteur distinct : c'est un étudiant, désigné tempor
 ## 3. Périmètre
 
 **Inclus dans cette version :**
--
+- Ouverture d'une session de cours par le formateur, avec génération d'un code de présence (Q2)
+- Marquage de la présence par l'étudiant via ce code, et ajout manuel par le formateur si besoin (Q14)
+- Dépôt du lien d'un exercice par l'étudiant, avec possibilité de le remplacer tant que personne ne l'a relu (Q13)
+- Assignation automatique et aléatoire d'un relecteur parmi les étudiants présents (Q7)
+- Relecture : note sur 20 (entière) et commentaire, correction possible tant que la session n'est pas clôturée
+- Tableau récapitulatif du formateur : présence, dépôts, moyenne, relectures en attente (Q16)
 
 **Explicitement exclu :**
--
-
-*Ce que tu exclus compte autant que ce que tu inclus. Un périmètre sans exclusion n'est pas un périmètre.*
+- L'authentification par mot de passe (Q1 — le client a demandé explicitement de ne pas s'en soucier)
+- Le design/l'esthétique de l'interface (le sujet précise : « Le rendu visuel n'est pas noté. Aucun point pour le CSS »)
+- La notification automatique (email/SMS) des étudiants ou du formateur
+- La gestion de plusieurs formateurs ou de droits différenciés entre formateurs
+- L'export du tableau (PDF, Excel...) — le formateur consulte les données uniquement à l'écran
+- La modification ou suppression d'une session déjà ouverte, autre que sa clôture
 
 ## 4. Exigences fonctionnelles
 
