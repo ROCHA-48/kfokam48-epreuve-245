@@ -1,8 +1,8 @@
 # Cahier des charges — <nom de ton application>
 
-**Auteur :** <nom et prénom(s)> · <matricule>
+**Auteur :** ROCHA Wilson · KF48-DLA-245
 **Version :** 1 · **Date :** <date>
-**Frontend choisi :** <React | Angular | Next.js>, parce que ...
+**Frontend choisi :** React, parce que c'est le framework que je maîtrise le mieux et qui permet d'aller vite sur les trois écrans demandés.
 
 > Ce squelette est à remplir, pas à recopier. Les dix sections sont imposées et dans cet ordre.
 > Tout ce qui reste en `<...>` ou en italique à la remise compte pour zéro.
@@ -11,7 +11,11 @@
 
 ## 1. Contexte et objectif
 
-*À quel problème concret l'application répond, et pour qui. Cinq à dix lignes, avec tes mots — pas un copier-coller de l'énoncé.*
+Aujourd'hui, à KFOKAM48, la présence des étudiants est gérée manuellement : chacun émarge sur une liste papier, que le formateur doit ensuite recompter et ressaisir à la main pour savoir qui était présent. Il n'existe aucune trace fiable en cas de contestation, et impossible de croiser rapidement présence, exercices et notes pour avoir une vue d'ensemble sur un étudiant.
+
+Du côté des exercices, les étudiants s'échangent leurs travaux et leurs retours entre eux de façon informelle, probablement par WhatsApp ou email. Rien ne garantit qu'un exercice est relu une seule fois, par une personne différente de son auteur, ni que le formateur puisse savoir qui a déposé, qui a été relu et qui attend encore une relecture.
+
+Cette application s'adresse au formateur et à l'étudiant. Pour le formateur, elle offre une vue d'ensemble en un coup d'œil : présence, dépôts, moyennes et relectures en attente, sans recouper plusieurs sources. Pour l'étudiant, elle remplace un processus manuel par un geste simple et rapide — saisir un code, déposer un lien — avec la garantie que sa relecture reste anonyme et équitable.
 
 ## 2. Acteurs et rôles
 
